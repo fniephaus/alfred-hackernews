@@ -45,6 +45,6 @@ def refresh(wf):
 if __name__ == '__main__':
     wf = Workflow(update_settings={
         'github_slug': 'fniephaus/alfred-hackernews',
-        'version': 'v0.9',
+        'version': 'v0.9.1',
     })
     sys.exit(wf.run(main))
