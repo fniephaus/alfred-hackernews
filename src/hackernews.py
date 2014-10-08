@@ -8,9 +8,9 @@ from workflow.background import run_in_background, is_running
 
 def main(wf):
     user_input = ''.join(wf.args)
+
     if wf.update_available:
-        subtitle = 'New: %s' % wf.update_info['body']
-        wf.add_item("An update is available!", subtitle,
+        wf.add_item("An update is available!",
                     autocomplete='workflow:update', valid=False)
 
     refresh(wf)
@@ -45,6 +45,6 @@ def refresh(wf):
 if __name__ == '__main__':
     wf = Workflow(update_settings={
         'github_slug': 'fniephaus/alfred-hackernews',
-        'version': 'v0.8',
+        'version': 'v0.9',
     })
     sys.exit(wf.run(main))
