@@ -16,7 +16,7 @@ def main(wf):
     refresh(wf)
     top_stories = wf.cached_data('hackernews_top_10', max_age=60)
     while top_stories is None:
-        top_stories = wf.cached_data('hackernews_top_10', max_age=0)
+        top_stories = wf.cached_data('hackernews_top_10', max_age=60)
         time.sleep(1)
 
     for i in range(2,11):
