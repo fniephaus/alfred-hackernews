@@ -1,19 +1,19 @@
-from workflow import Workflow
-from workflow import web
+import multiprocessing
+from workflow import Workflow, web
+
+def load_item(item_id):
+    return web.get('https://hacker-news.firebaseio.com/v0/item/%s.json' % item_id).json()
+
+def load_chunk(n, items):
+    pool = multiprocessing.Pool(processes=5)
+    content = pool.map(load_item, items)
+    wf.cache_data('hn_page_%s' % n, content)
+
 
 if __name__ == '__main__':
     wf = Workflow()
-    if not wf.cached_data_fresh('hackernews_top_10', 60):
-
+    if not wf.cached_data_fresh('hn_page_1', 30):
         items = web.get('https://hacker-news.firebaseio.com/v0/topstories.json').json()
-        top_stories = []
-        i = 1
-        for item_id in items[:50]:
-
-            item = web.get('https://hacker-news.firebaseio.com/v0/item/%s.json' % item_id).json()
-            top_stories.append((item_id, item))
-
-            if i % 10 == 0:
-                wf.cache_data('hackernews_top_%s0' % (i / 10), top_stories)
-                top_stories = []
-            i += 1
+        for i in range(4):
+            offset = i*15
+            load_chunk(i + 1, items[offset:offset+15])
