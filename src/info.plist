@@ -44,9 +44,9 @@
 				<key>script</key>
 				<string>python hackernews.py "{query}"</string>
 				<key>subtext</key>
-				<string>Manage your hackernews list with Alfred</string>
+				<string>Read Hacker News with Alfred</string>
 				<key>title</key>
-				<string>Hackernews</string>
+				<string>HackerNews</string>
 				<key>type</key>
 				<integer>0</integer>
 				<key>withspace</key>
